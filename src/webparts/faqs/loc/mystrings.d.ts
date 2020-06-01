@@ -9,6 +9,7 @@ declare interface IFaqsWebPartStrings {
   QuestionFieldLabel: string;
   AnswerFieldLabel: string;
   CategoryFieldLabel: string;
+  SortFieldLabel: string;
 }
 
 declare module 'FaqsWebPartStrings' {

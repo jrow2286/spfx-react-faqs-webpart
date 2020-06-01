@@ -9,6 +9,7 @@ define([], function() {
     "ListNameFieldLabel": "List",
     "QuestionFieldLabel": "Question Column",
     "AnswerFieldLabel": "Answer Column",
-    "CategoryFieldLabel": "Category Column (optional)"
+    "CategoryFieldLabel": "Category Column (optional)",
+    "SortFieldLabel": "Sort Column (optional)"
   }
 });

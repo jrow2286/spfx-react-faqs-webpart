@@ -24,6 +24,7 @@ export interface IFaqsWebPartProps {
   questionField: string;
   answerField: string;
   categoryField: string;
+  sortField: string;
   collapseCategories: boolean;
   collapseAnswers: boolean;
 }
@@ -113,7 +114,7 @@ export default class FaqsWebPart extends BaseClientSideWebPart<IFaqsWebPartProps
       selectFields.push(this.properties.categoryField);
     }
     sp.web.lists.getByTitle(this.properties.listName)
-    .items.filter(filter).select(selectFields.join(',')).get()
+    .items.filter(filter).select(selectFields.join(',')).orderBy(this.properties.sortField).get()
     .then((items: any[]): void => {
       let self = this;
       items.forEach((item) => {
@@ -229,6 +230,9 @@ export default class FaqsWebPart extends BaseClientSideWebPart<IFaqsWebPartProps
       previousVal = this.properties.categoryField;
       this.onPropertyPaneFieldChanged('categoryField', previousVal, this.properties.categoryField = '');
       
+      previousVal = this.properties.sortField;
+      this.onPropertyPaneFieldChanged('sortField', previousVal, this.properties.sortField = '');
+
       this.listFieldsDropdownDisabled = true;
 
       this.context.propertyPane.refresh();
@@ -295,6 +299,12 @@ export default class FaqsWebPart extends BaseClientSideWebPart<IFaqsWebPartProps
                   label: strings.CategoryFieldLabel,
                   options: this.listFields,
                   selectedKey: this.properties.categoryField,
+                  disabled: this.listFieldsDropdownDisabled
+                }),
+                PropertyPaneDropdown('sortField', {
+                  label: strings.SortFieldLabel,
+                  options: this.listFields,
+                  selectedKey: this.properties.sortField,
                   disabled: this.listFieldsDropdownDisabled
                 })
               ]
